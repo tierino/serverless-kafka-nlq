@@ -1,0 +1,210 @@
+{
+  "tables": [
+    {
+      "name": "stations_tablename",
+      "schema": "CREATE TABLE `stations_tablename` (`station_id` string, `name` string, `short_name` string, `latitude` double, `longitude` double, `region_id` bigint, `capacity` bigint, `eightd_has_key_dispenser` boolean, `num_bikes_available` bigint, `num_bikes_disabled` bigint, `num_docks_available` bigint, `num_docks_disabled` bigint, `is_installed` boolean, `is_renting` boolean, `is_returning` boolean, `eightd_has_available_keys` boolean);",
+      "description": "This table stores information about bike rental stations.",
+      "columns": [
+        {
+          "doc": "Unique identifier of a station.",
+          "name": "station_id",
+          "synonyms": ["station id"]
+        },
+        {
+          "doc": "Public name of the station.",
+          "name": "name",
+          "synonyms": ["station name"]
+        },
+        {
+          "doc": "Short name or other type of identifier, as used by the data publisher.",
+          "name": "short_name",
+          "type": ["internal name", "system name"]
+        },
+        {
+          "doc": "The latitude of station. The field value must be a valid WGS 84 latitude in decimal degrees format.",
+          "name": "latitude",
+          "synonyms": ["station latitude"]
+        },
+        {
+          "doc": "The longitude of station. The field value must be a valid WGS 84 latitude in decimal degrees format.",
+          "name": "longitude",
+          "synonyms": ["station longitude"]
+        },
+        {
+          "doc": "ID of the region where station is located.",
+          "name": "region_id",
+          "synonyms": ["region id", "area id"]
+        },
+        {
+          "doc": "Number of total docking points installed at this station, both available and unavailable.",
+          "name": "capacity",
+          "synonyms": ["station capacity"]
+        },
+        {
+          "name": "eightd_has_key_dispenser"
+        },
+        {
+          "doc": "Number of bikes available for rental.",
+          "name": "num_bikes_available",
+          "synonyms": ["number of available bikes", "available bike count"]
+        },
+        {
+          "doc": "Number of disabled bikes at the station.",
+          "name": "num_bikes_disabled",
+          "synonyms": ["number of disabled bikes", "disabled bike count"]
+        },
+        {
+          "doc": "Number of docks accepting bike returns.",
+          "name": "num_docks_available",
+          "synonyms": ["number of available docks", "available dock count"]
+        },
+        {
+          "doc": "Number of empty but disabled dock points at the station.",
+          "name": "num_docks_disabled",
+          "synonyms": ["number of disabled docks", "disabled dock count"]
+        },
+        {
+          "doc": "Is the station currently on the street?",
+          "name": "is_installed",
+          "synonyms": ["is installed"]
+        },
+        {
+          "doc": "Is the station currently renting bikes?",
+          "name": "is_renting",
+          "synonyms": ["is renting", "is currently renting"]
+        },
+        {
+          "doc": "Is the station accepting bike returns?",
+          "name": "is_returning",
+          "synonyms": ["is accepting returns", "is currently accepting returns"]
+        },
+        {
+          "name": "eightd_has_available_keys"
+        }
+      ],
+      "sample_queries": [
+        {
+          "query": "select count(*) as renting_bikes from stations where is_renting = true",
+          "user_input": "Number of stations currently renting bikes."
+        },
+        {
+          "query": "select count(*) as to_the_north from stations where latitude > 40.7685",
+          "user_input": "Number of stations north of latitude 40.7685."
+        }
+      ]
+    },
+    {
+      "name": "trips_tablename",
+      "schema": "CREATE TABLE `trips_tablename` (`tripduration` bigint, `starttime` string, `stoptime` string, `start_station_id` bigint, `start_station_name` string, `start_station_latitude` double, `start_station_longitude` double, `end_station_id` bigint, `end_station_name` string, `end_station_latitude` double, `end_station_longitude` double, `bikeid` bigint, `usertype` string, `birth_year` bigint, `gender` string, `customer_plan` string);",
+      "description": "This table stores information about trips taken with rented bikes.",
+      "columns": [
+        {
+          "default": null,
+          "doc": "Trip Duration (in seconds)",
+          "name": "tripduration",
+          "synonyms": ["trip duration", "trip duration in seconds"]
+        },
+        {
+          "default": null,
+          "doc": "Start Time, in NYC local time.",
+          "name": "starttime",
+          "synonyms": ["start time", "starting time", "departure time"]
+        },
+        {
+          "default": null,
+          "doc": "Stop Time, in NYC local time.",
+          "name": "stoptime",
+          "synonyms": ["stop time", "end time", "return time"]
+        },
+        {
+          "default": null,
+          "doc": "Start Station ID",
+          "name": "start_station_id",
+          "synonyms": ["start station id", "departure station id"]
+        },
+        {
+          "default": null,
+          "doc": "Start Station Name",
+          "name": "start_station_name",
+          "synonyms": ["start station name", "departure station name"]
+        },
+        {
+          "default": null,
+          "doc": "Start Station Latitude",
+          "name": "start_station_latitude",
+          "synonyms": ["start station latitude", "departure station latitude"]
+        },
+        {
+          "default": null,
+          "doc": "Start Station Longitude",
+          "name": "start_station_longitude",
+          "synonyms": ["start station longitude", "departure station longitude"]
+        },
+        {
+          "default": null,
+          "doc": "End Station ID",
+          "name": "end_station_id",
+          "synonyms": ["end station id", "return station id"]
+        },
+        {
+          "default": null,
+          "doc": "End Station Name",
+          "name": "end_station_name",
+          "synonyms": ["end station name", "return station name"]
+        },
+        {
+          "default": null,
+          "doc": "End Station Latitude",
+          "name": "end_station_latitude",
+          "synonyms": ["end station latitude", "return station latitude"]
+        },
+        {
+          "default": null,
+          "doc": "End Station Longitude",
+          "name": "end_station_longitude",
+          "synonyms": ["end station longitude", "return station longitude"]
+        },
+        {
+          "default": null,
+          "doc": "Bike ID",
+          "name": "bikeid",
+          "synonyms": ["bike id"]
+        },
+        {
+          "default": null,
+          "doc": "User Type (Customer = 24-hour pass or 7-day pass user, Subscriber = Annual Member)",
+          "name": "usertype",
+          "synonyms": ["user type", "type of user"]
+        },
+        {
+          "default": null,
+          "doc": "Renter year of Birth",
+          "name": "birth_year",
+          "synonyms": ["renter birth year", "renter year of birth"]
+        },
+        {
+          "default": null,
+          "doc": "Renter gender (unknown, male, female)",
+          "name": "gender",
+          "synonyms": ["renter gender", "gender of renter"]
+        },
+        {
+          "default": null,
+          "doc": "The name of the plan that determines the rate charged for the trip",
+          "name": "customer_plan",
+          "synonyms": ["customer plan", "payment plan"]
+        }
+      ],
+      "sample_queries": [
+        {
+          "query": "select count(*) from trips where birth_year between 1970 and 1979;",
+          "user_input": "Number of trips taken by people born in the 1970s."
+        },
+        {
+          "query": "select duration from trips order by duration limit 10;",
+          "user_input": "The duration of the 10 longest trips."
+        }
+      ]
+    }
+  ]
+}

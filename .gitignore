@@ -1,0 +1,7 @@
+ingest
+node_modules
+
+# sst
+.sst
+.venv
+.env
